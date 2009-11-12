@@ -1,3 +1,9 @@
+# Artistic License 2.0
+
+Copyright (c) 2000-2006, The Perl Foundation.
+
+Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.
+
 ## Preamble
 
 This license establishes the terms under which a given free software Package may be copied, modified, distributed, and/or redistributed. The intent is that the Copyright Holder maintains some artistic control over the development of that Package while still keeping the Package available as open source and free software.
