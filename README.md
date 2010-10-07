@@ -1,19 +1,19 @@
-# Facebook Connect Commenters Plugin for Movable Type
+# Facebook Commenters Plugin for Movable Type
 
-Authors: Mark Paschal and David Recordon  
-Copyright 2008 Six Apart, Ltd.  
+Authors: Mark Paschal and David Recordon
+Copyright 2008 Six Apart, Ltd.
 License: [Artistic License 2.0](http://www.opensource.org/licenses/artistic-license-2.0.php)
 
 
 ## Overview
 
-The Facebook Connect Commenters plugin for Movable Type allows commenters to login to your blog using their Facebook account.  It makes use of the Facebook Connect APIs to provide a rich user experience.  Commenters are able to automatically bring their name, profile photo, and friends with them when commenting on a blog running this plugin.
+The Facebook Commenters plugin for Movable Type allows commenters to login to your blog using their Facebook account via Facebook Connect.  It makes use of the Facebook Connect APIs to provide a rich user experience.  Commenters are able to automatically bring their name, profile photo, and friends with them when commenting on a blog running this plugin.
 
 All of this profile information respects a user's privacy settings from Facebook; if they only share their profile photo with their friends then it won't be displayed publicly on a blog. Once a Facebook user has logged in, comments left from other Facebook users will display additional data.  Profile photos and names that were hidden publicly will now be displayed assuming the logged in user is able to see them on Facebook.com.  Additionally, comments left from friends of the user on Facebook will be highlighted.
 
 After leaving a comment, the Facebook user will be given the option to share with their friends on Facebook that they commented on the blog post.  This in turn should help others discover your blog.
 
-**PLEASE NOTE:** Facebook Connect currently requires pre-approval in order for you to launch your blog integration. As long as you are using the standard blog plugin, this should be painless and quick – it should take just a few days at the most.   
+**PLEASE NOTE:** Facebook Connect currently requires pre-approval in order for you to launch your blog integration. As long as you are using the standard blog plugin, this should be painless and quick – it should take just a few days at the most.
 
 Check here to see if Facebook Connect is available for launch with out approval: <http://wiki.developers.facebook.com/index.php/Facebook_Connect_Launch_Plans>
 

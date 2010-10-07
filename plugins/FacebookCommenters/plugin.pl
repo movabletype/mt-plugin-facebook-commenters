@@ -9,8 +9,8 @@ our $instance = __PACKAGE__->new({
     description => '<MT_TRANS phrase="Provides commenter registration through Facebook Connect.">',
     version     => '1.1.2',
     author_name => 'Six Apart, Ltd.',
-    author_link => 'http://www.sixapart.com/',
-    plugin_link => 'http://www.sixapart.com/',
+    author_link => 'http://www.movabletype.org/',
+    plugin_link => 'http://www.movabletype.org/',
     l10n_class  => 'FacebookCommenters::L10N',
 });
 MT->add_plugin($instance);
