@@ -1,4 +1,3 @@
-
 package FacebookCommenters::Plugin;
 use base qw( MT::Plugin );
 
