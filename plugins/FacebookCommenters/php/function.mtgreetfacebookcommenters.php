@@ -16,7 +16,7 @@ function smarty_function_mtgreetfacebookcommenters($args, &$ctx) {
 
     # Load settings
     $config = $ctx->mt->db->fetch_plugin_config('FacebookCommenters', "blog:$blog_id");
-    if (empty($config) || 
+    if (empty($config) ||
         empty($config['facebook_app_key']) ||
         empty($config['facebook_story_template_id']))
         return '';

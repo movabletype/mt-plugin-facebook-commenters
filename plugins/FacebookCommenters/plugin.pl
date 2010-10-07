@@ -117,8 +117,8 @@ EOF
         tags => {
             function => {
                 GreetFacebookCommenters => '$FacebookCommenters::FacebookCommenters::Plugin::tag_greet',
-		FacebookApplicationID => '$FacebookCommenters::FacebookCommenters::Plugin::tag_fb_app_id',
-		FacebookStoryTemplateID => '$FacebookCommenters::FacebookCommenters::Plugin::tag_fb_story_tmpl_id',
+                FacebookApplicationID => '$FacebookCommenters::FacebookCommenters::Plugin::tag_fb_app_id',
+                FacebookStoryTemplateID => '$FacebookCommenters::FacebookCommenters::Plugin::tag_fb_story_tmpl_id',
             },
         },
     });
