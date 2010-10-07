@@ -1,12 +1,12 @@
-# Facebook Connect Commenters Plugin for Movable Type
+# Facebook Commenters Plugin for Movable Type
 
 Authors: Mark Paschal and David Recordon
 Copyright 2008 Six Apart, Ltd.
-License: Artistic, licensed under the same terms as Perl itself
+License: Licensed under the same terms as Perl itself.
 
 ## Overview
 
-The Facebook Connect Commenters plugin for Movable Type allows commenters to login to your
+The Facebook Commenters plugin for Movable Type allows commenters to login to your
 blog using their Facebook account.  It makes use of the Facebook Connect APIs to provide a
 rich user experience.  Commenters are able to automatically bring their name, profile photo,
 and friends with them when commenting on a blog running this plugin.
@@ -24,7 +24,7 @@ discover your blog.
 
 **PLEASE NOTE:** Facebook Connect currently requires pre-approval in order for you to launch your
 blog integration. As long as you are using the standard blog plugin, this should be painless
-and quick – it should take just a few days at the most.   
+and quick – it should take just a few days at the most.
 
 Check here to see if Facebook Connect is available for launch with out approval: <http://wiki.developers.facebook.com/index.php/Facebook_Connect_Launch_Plans>
 
@@ -84,11 +84,11 @@ useful guide to adding userpics to your templates.
         <div class="inner">
             <div class="comment-header">
                 <div class="user-pic<mt:If tag="CommenterAuthType" eq="Facebook"> comment-fb-<$mt:CommenterUsername$></mt:If>">
-    
+
                 <mt:If tag="CommenterAuthType" eq="Facebook">
                     <a href="http://www.facebook.com/profile.php?id=<$mt:CommenterUsername$>" class="auth-icon"><img src="<$mt:CommenterAuthIconURL size="logo_small"$>" alt="<$mt:CommenterAuthType$>"/></a>
                     <fb:profile-pic uid="<$mt:CommenterUsername$>" size="square" linked="true"><img src="http://static.ak.connect.facebook.com/pics/q_default.gif" /></fb:profile-pic>
-    
+
                 <mt:Else>
                     <mt:If tag="CommenterAuthIconURL">
                         <a href="<$mt:CommenterURL$>" class="auth-icon"><img src="<$mt:CommenterAuthIconURL size="logo_small"$>" alt="<$mt:CommenterAuthType$>"/></a>
@@ -96,12 +96,12 @@ useful guide to adding userpics to your templates.
                     <img src="<$mt:StaticWebPath$>images/default-userpic-50.jpg" />
                 </mt:If>
                 </div>
-    
+
                 <div class="asset-meta">
                     <span class="byline">
                     <mt:If tag="CommenterAuthType" eq="Facebook">
                         By <span class="vcard author"><fb:name uid="<$mt:CommenterUsername$>" linked="true" useyou="false"><a href="http://www.facebook.com/profile.php?id=<$mt:CommenterUsername$>"><$mt:CommenterName$></a></fb:name></span> on <a href="#comment-<$mt:CommentID$>"><abbr class="published" title="<$mt:CommentDate format_name="iso8601"$>"><$mt:CommentDate$></abbr></a></span>
-    
+
                     <mt:Else>
                         By <span class="vcard author"><mt:If tag="CommenterURL"><a href="<$mt:CommenterURL$>"><$mt:CommentAuthor default_name="Anonymous" $></a><mt:Else><$mt:CommentAuthorLink default_name="Anonymous" show_email="0"$></mt:If></span><mt:IfNonEmpty tag="CommentAuthorIdentity"><$mt:CommentAuthorIdentity$></mt:IfNonEmpty> on <a href="#comment-<$mt:CommentID$>"><abbr class="published" title="<$mt:CommentDate format_name="iso8601"$>"><$mt:CommentDate$></abbr></a></span>
                     </mt:If>
@@ -124,4 +124,3 @@ can be tweaked to adjust the display of comments.
     .comment-friend {
         background-color: #c3cddf;
     }
-

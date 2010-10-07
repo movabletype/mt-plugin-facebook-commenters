@@ -12,7 +12,7 @@ sub login {
         or return $app->error('No blog_id');
 
     my %facebook = map { $_ => $app->param("facebook_$_") || q{} } qw( id nick url );
-    
+
 =pod
 
     my $plugin = MT->component('FacebookCommenters');
@@ -24,7 +24,7 @@ sub login {
         params => [],
         sig    => $facebook{sig},
     );
-    
+
     return $app->error($plugin->translate(
         q{Could not authenticate Facebook commenter: Facebook's signature was not valid.}))
             if !$sig_good;
@@ -66,7 +66,7 @@ sub login {
             $facebook{url},   # url
         );
     }
-    
+
     return $app->redirect_to_target();
 }
 

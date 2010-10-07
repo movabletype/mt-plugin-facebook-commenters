@@ -84,7 +84,7 @@ EOF
                     <script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
                     <script type="text/javascript" src="<$mt:StaticWebPath$>plugins/FacebookCommenters/fbconnect.js"></script>
                     <script type="text/javascript">
-                      FB.init(\'<mt:var name="fb_api_key" escape="js">\', 
+                      FB.init(\'<mt:var name="fb_api_key" escape="js">\',
                               \'<mt:staticwebpath>plugins/FacebookCommenters/xd_receiver.html\');
                     </script>
 ',
@@ -104,7 +104,7 @@ EOF
                     my $fb_api_key = $instance->get_config_value('facebook_app_key', "blog:" . $blog->id);
                     my $fb_api_secret = $instance->get_config_value('facebook_app_secret', "blog:" . $blog->id);
                     unless ( $fb_api_secret && $fb_api_key ) {
-                        $$reason = 
+                        $$reason =
                             '<a href="?__mode=cfg_plugins&amp;blog_id=' . $blog->id . '">'
                           . $instance->translate('Set up Facebook Commenters plugin')
                           . '</a>';
@@ -128,7 +128,7 @@ EOF
     my $new_comment_author_link = sub {
         my ($ctx, $args) = @_;
         my $link = $old_comment_author_link->(@_);
-        
+
         my $commenter = $ctx->stash('commenter');
         if (!$commenter) {
             return $link;
@@ -247,4 +247,3 @@ sub tag_greet {
 }
 
 1;
-

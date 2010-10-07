@@ -65,4 +65,3 @@ function smarty_function_mtgreetfacebookcommenters($args, &$ctx) {
 
     return $_contents;
 }
-
