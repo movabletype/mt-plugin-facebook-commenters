@@ -59,7 +59,7 @@ The Facebook Commenters plugin ships with all of the other external libraries yo
 
 ### Embedding the Javascript into the Header
 
-To add basic support for Facebook Connect, you will need to add a non-trivial amount of Javascript into the HTML `<head>` of your web page. You have two choices in how to do this: the first is quick and easy and what most people should do, the second is designed for people who need to specify javascript manually. 
+To add basic support for Facebook Connect, you will need to add a non-trivial amount of Javascript into the HTML `<head>` of your web page. You have two choices in how to do this: the first is quick and easy and what most people should do, the second is designed for people who need to specify javascript manually.
 
 ### Using the GreetFacebookCommenters Slug (recommended)
 
@@ -99,11 +99,11 @@ To display a Facebook user's profile photo next to their comment, you will have 
         <div class="inner">
             <div class="comment-header">
                 <div class="user-pic<mt:If tag="CommenterAuthType" eq="Facebook"> comment-fb-<$mt:CommenterUsername$></mt:If>">
-    
+
                 <mt:If tag="CommenterAuthType" eq="Facebook">
                     <a href="http://www.facebook.com/profile.php?id=<$mt:CommenterUsername$>" class="auth-icon"><img src="<$mt:CommenterAuthIconURL size="logo_small"$>" alt="<$mt:CommenterAuthType$>"/></a>
                     <fb:profile-pic uid="<$mt:CommenterUsername$>" size="square" linked="true"><img src="http://static.ak.connect.facebook.com/pics/q_default.gif" /></fb:profile-pic>
-    
+
                 <mt:Else>
                     <mt:If tag="CommenterAuthIconURL">
                         <a href="<$mt:CommenterURL$>" class="auth-icon"><img src="<$mt:CommenterAuthIconURL size="logo_small"$>" alt="<$mt:CommenterAuthType$>"/></a>
@@ -111,12 +111,12 @@ To display a Facebook user's profile photo next to their comment, you will have 
                     <img src="<$mt:StaticWebPath$>images/default-userpic-50.jpg" />
                 </mt:If>
                 </div>
-    
+
                 <div class="asset-meta">
                     <span class="byline">
                     <mt:If tag="CommenterAuthType" eq="Facebook">
                         By <span class="vcard author"><fb:name uid="<$mt:CommenterUsername$>" linked="true" useyou="false"><a href="http://www.facebook.com/profile.php?id=<$mt:CommenterUsername$>"><$mt:CommenterName$></a></fb:name></span> on <a href="#comment-<$mt:CommentID$>"><abbr class="published" title="<$mt:CommentDate format_name="iso8601"$>"><$mt:CommentDate$></abbr></a></span>
-    
+
                     <mt:Else>
                         By <span class="vcard author"><mt:If tag="CommenterURL"><a href="<$mt:CommenterURL$>"><$mt:CommentAuthor default_name="Anonymous" $></a><mt:Else><$mt:CommentAuthorLink default_name="Anonymous" show_email="0"$></mt:If></span><mt:IfNonEmpty tag="CommentAuthorIdentity"><$mt:CommentAuthorIdentity$></mt:IfNonEmpty> on <a href="#comment-<$mt:CommentID$>"><abbr class="published" title="<$mt:CommentDate format_name="iso8601"$>"><$mt:CommentDate$></abbr></a></span>
                     </mt:If>
