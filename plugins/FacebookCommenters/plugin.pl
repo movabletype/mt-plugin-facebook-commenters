@@ -1,3 +1,7 @@
+# Copyright (C) 2001-2008 Six Apart, Ltd.
+#
+# Licensed under the same terms as Perl itself.
+
 package FacebookCommenters::Plugin;
 use base qw( MT::Plugin );
 
