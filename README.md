@@ -1,8 +1,8 @@
 # Facebook Commenters Plugin for Movable Type
 
 Authors: Mark Paschal and David Recordon
-Copyright 2008 Six Apart, Ltd.
-License: [Artistic License 2.0](http://www.opensource.org/licenses/artistic-license-2.0.php)
+Copyright (C) 2008 Six Apart, Ltd.
+License: Licensed under the same terms as Perl itself.
 
 
 ## Overview
