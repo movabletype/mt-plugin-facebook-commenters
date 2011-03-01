@@ -85,13 +85,17 @@ EOF
                 </form>
 
                 <!-- put the script tags in the <body> element, after all XFBML -->
-                    <script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
+                    <script src="http://connect.facebook.net/en_US/all.js" type="text/javascript"></script>
                     <script type="text/javascript" src="<$mt:StaticWebPath$>plugins/FacebookCommenters/fbconnect.js"></script>
+                    <div id="fb-root"></div>
                     <script type="text/javascript">
-                      FB.init(\'<mt:var name="fb_api_key" escape="js">\',
-                              \'<mt:staticwebpath>plugins/FacebookCommenters/xd_receiver.html\');
-                    </script>
-',
+                        FB.init({
+                          appId: \'<mt:var name="fb_api_key" escape="js">\',
+                          status: true,
+                          cookie: true,
+                          xfbml: true
+                        });
+                     </script>',
                 login_form_params => sub {
                     my ($key, $blog_id, $entry_id, $static) = @_;
                     my $params = MT::_commenter_auth_params(@_);

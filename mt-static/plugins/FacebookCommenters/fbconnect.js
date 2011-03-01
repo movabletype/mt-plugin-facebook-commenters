@@ -1,4 +1,5 @@
 
+
 /*
  * Show the feed form. This would be typically called in response to the
  * onclick handler of a "Publish" button, or in the onload event after
@@ -41,14 +42,18 @@ function facebook_show_feed_checkbox() {
  * Run 
  */
 function signface_login () {
-    var viewerId = FB.Connect.get_loggedInUser();
-    document.getElementById('facebook-signin-id-input').setAttribute('value', viewerId);
-    document.getElementById('facebook-signin-url-input').setAttribute('value', 'http://www.facebook.com/profile.php?id=' + viewerId);
-    FB.Facebook.apiClient.users_getInfo(viewerId, ['first_name,pic_square'], function (x) {
-	if (x[0] && x[0]['first_name']) {
-	    var nickname = x[0]['first_name'];
-	    document.getElementById('facebook-signin-nick-input').setAttribute('value', nickname);
-	}
-	document.getElementById('facebook-signin-form').submit();
-    });
+   FB.login(function(response) {
+      if(response.session) {
+         var viewerId = response.session.uid;
+         document.getElementById('facebook-signin-id-input').setAttribute('value', viewerId);
+         document.getElementById('facebook-signin-url-input').setAttribute('value', 'http://www.facebook.com/profile.php?id=' + viewerId);
+         FB.api({method: 'fql.query', query: 'SELECT first_name, pic_square FROM user WHERE uid=' + viewerId}, function (x) {
+            if (x[0] && x[0]['first_name']) {
+            var nickname = x[0]['first_name'];
+            document.getElementById('facebook-signin-nick-input').setAttribute('value', nickname);
+         }
+         document.getElementById('facebook-signin-form').submit();
+         });
+      }
+   });
 }
