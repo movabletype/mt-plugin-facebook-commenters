@@ -1,0 +1,46 @@
+name: Facebook Commenters
+id: FacebookCommenters
+key: FacebookCommenters
+description: <MT_TRANS phrase="Provides commenter registration through Facebook Connect.">
+author_name: 'Six Apart, Ltd.'
+author_link: http://www.sixapart.com/
+l10n_class: FacebookCommenters::L10
+version: 2.0
+
+commenter_authenticators:
+    Facebook:
+        class: FacebookCommenters::Auth
+        label: Facebook
+        logo: plugins/FacebookCommenters/signin_facebook.png
+        logo_small: plugins/FacebookCommenters/facebook_logo.png
+        login_form: |
+            <form id="facebook-signin-form" method="post" action="<mt:var name="script_url">">
+                <input type="hidden" name="__mode"   value="login_external">
+                <input type="hidden" name="blog_id"  value="<mt:var name="blog_id">">
+                <input type="hidden" name="entry_id" value="<mt:var name="entry_id">">
+                <input type="hidden" name="static"   value="<mt:var name="static" escape="html">">
+                <input type="hidden" name="key"      value="Facebook">
+            </form>
+            <div>
+                <a href="#" onclick="document.getElementById('facebook-signin-form').submit()">
+                    <img src='<mt:var name="static_uri">plugins/FacebookCommenters/login-button.png' alt='Sign in'>
+                </img></a>
+            </div>
+        login_form_params: FacebookCommenters::Auth::commenter_auth_params
+        condition: FacebookCommenters::Auth::condition
+
+settings:
+    facebook_app_key:
+        scope: blog
+    facebook_app_secret:
+        scope: blog
+
+blog_config_template: blog_config_template.tmpl
+
+callbacks:
+    MT::PluginData::pre_save: $FacebookCommenters::FacebookCommenters::Auth::plugin_data_pre_save
+    save_config_filter.FacebookCommenters: $FacebookCommenters::FacebookCommenters::Auth::check_api_key_secret
+
+tags:
+    function:
+        GreetFacebookCommenters: $FacebookCommenters::FacebookCommenters::Auth::GreetFacebookCommenters

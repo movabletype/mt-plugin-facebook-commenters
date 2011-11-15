@@ -1,4 +1,8 @@
 <?php
+# Copyright (C) 2008 Six Apart, Ltd. All Rights Reserved.
+#
+# Licensed under the same terms as Perl itself.
+
 require_once('commenter_auth_lib.php');
 
 class FacebookCommenterAuth extends BaseCommenterAuthProvider {
