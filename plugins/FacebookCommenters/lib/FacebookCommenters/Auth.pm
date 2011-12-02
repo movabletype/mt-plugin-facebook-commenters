@@ -51,9 +51,6 @@ sub __create_return_url {
     my $q   = $app->param;
     my $cfg = $app->config;
 
-    my $cgi_path = $app->config('CGIPath');
-    $cgi_path .= '/' unless $cgi_path =~ m!/$!;
-
     my $blog_id = $q->param("blog_id");
     $blog_id =~ s/\D//g;
     my $static = $q->param("static");
@@ -70,7 +67,7 @@ sub __create_return_url {
 
     my $return_url
         = $app->base
-        . $cgi_path
+        . $app->path
         . $cfg->CommentScript . "?"
         . join( '&', @params );
     return MT::Util::encode_url($return_url);
