@@ -57,7 +57,7 @@ sub __create_return_url {
 
     my @params = (
         "__mode=handle_sign_in", "key=Facebook", "blog_id=$blog_id",
-        "static=" . MT::Util::encode_url( $q->param("static") ),
+        "static=" . _encode_url( $q->param("static") ),
     );
 
     if ( my $entry_id = $q->param("entry_id") ) {
@@ -70,7 +70,7 @@ sub __create_return_url {
         . $app->path
         . $cfg->CommentScript . "?"
         . join( '&', @params );
-    return MT::Util::encode_url($return_url);
+    return _encode_url($return_url);
 }
 
 sub login {
@@ -281,6 +281,14 @@ sub check_api_key_secret {
 
 sub GreetFacebookCommenters {
     return '';
+}
+
+sub _encode_url {
+    my ( $str, $enc ) = @_;
+    $enc ||= MT->config->PublishCharset;
+    my $encoded = Encode::encode( $enc, $str );
+    $encoded =~ s!([^a-zA-Z0-9_.-])!uc sprintf "%%%02x", ord($1)!eg;
+    $encoded;
 }
 
 1;
