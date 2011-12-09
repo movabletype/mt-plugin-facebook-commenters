@@ -7,6 +7,8 @@ use warnings;
 
 my $PluginKey = 'FacebookCommenters';
 
+sub password_exists { 0 }
+
 sub instance {
     my ($app) = @_;
     $app ||= 'MT';
