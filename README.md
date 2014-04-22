@@ -39,7 +39,7 @@ profile picture. (if one exists)
 
 ### Using the GreetFacebookCommenters Slug
 
-For backward compatability, please add this tag to your HTML `<head>` of your web site
+For backward compatibility, please add this tag to your HTML `<head>` of your web site
 
     <$mt:GreetFacebookCommenters$>
 
