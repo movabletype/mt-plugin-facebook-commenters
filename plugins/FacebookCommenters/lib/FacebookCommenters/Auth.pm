@@ -35,7 +35,7 @@ sub condition {
 sub commenter_auth_params {
     my ( $key, $blog_id, $entry_id, $static ) = @_;
     require MT::Util;
-    if ( $static =~ m/^http%3A%2F%2F/ ) {
+    if ( $static =~ m/^https?%3A%2F%2F/ ) {
 
         # the URL was encoded before, but we want the normal version
         $static = MT::Util::decode_url($static);

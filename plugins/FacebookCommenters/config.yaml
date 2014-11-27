@@ -5,7 +5,7 @@ description: <MT_TRANS phrase="Provides commenter registration through Facebook 
 author_name: 'Six Apart, Ltd.'
 author_link: http://www.movabletype.org/
 l10n_class: FacebookCommenters::L10
-version: 2.2
+version: 2.21
 
 commenter_authenticators:
     Facebook:
