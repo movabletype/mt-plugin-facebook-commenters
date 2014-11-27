@@ -16,6 +16,12 @@ use vars qw( %Lexicon );
 
 ## plugins/FacebookCommenters/lib/FacebookCommenters/Auth.pm
 	'Set up Facebook Commenters plugin' => 'Facebook Commentersプラグイン設定',
+	'Authentication failure: [_1], reason:[_2]' => '認証に失敗しました: [_1], 理由:[_2]',
+	'Failed to created commenter.' => 'コメンターの作成に失敗しました。',
+	'Failed to create a session.' => 'コメンターセッションの作成に失敗しました。',
+	'Facebook Commenters needs either Crypt::SSLeay or IO::Socket::SSL installed to communicate with Facebook.' => 'Facebook Commenters を利用するには、Crypt::SSLeay または IO::Socket::SSLのいずれかがインストールされている必要があります。',
+	'Please enter your Facebook App key and secret.' => 'FacebookアプリケーションキーとFacebookアプリケーションシークレットを入力してください。',
+	'Could not verify this app with Facebook: [_1]' => 'Facebookでこのアプリケーションを確認できません: [_1]',
 
 ## plugins/FacebookCommenters/tmpl/blog_config_template.tmpl
 	'Facebook Application Key' => 'Facebookアプリケーションキー',

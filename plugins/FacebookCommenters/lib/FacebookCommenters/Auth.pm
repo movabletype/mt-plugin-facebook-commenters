@@ -7,7 +7,7 @@ use warnings;
 
 my $PluginKey = 'FacebookCommenters';
 
-sub password_exists { 0 }
+sub password_exists {0}
 
 sub instance {
     my ($app) = @_;
@@ -95,19 +95,22 @@ sub login {
 sub handle_sign_in {
     my $class = shift;
     my ( $app, $auth_type ) = @_;
-    my $q = $app->param;
+    my $q      = $app->param;
+    my $plugin = instance($app);
 
     if ( $q->param("error") ) {
-        return $app->error( "Authonticating end in error: "
-                . $q->param("error")
-                . ", reason:"
-                . $q->param("error_description") );
+        return $app->error(
+            $plugin->translate(
+                "Authentication failure: [_1], reason:[_2]",
+                $q->param("error"),
+                $q->param("error_description")
+            )
+        );
     }
 
     my $success_code = $q->param("code");
     my $ua = $app->new_ua( { paranoid => 1 } );
 
-    my $plugin  = instance($app);
     my $blog_id = $app->blog->id;
     my $facebook_api_key
         = $plugin->get_config_value( 'facebook_app_key', "blog:$blog_id" );
@@ -164,13 +167,14 @@ sub handle_sign_in {
         );
     }
 
-    return $app->error("Failed to created commenter")
+    return $app->error( $plugin->translate("Failed to created commenter.") )
         unless $cmntr;
 
     __get_userpic($cmntr);
 
     $app->make_commenter_session($cmntr)
-        or return $app->error("Failed to create a session");
+        or return $app->error(
+        $plugin->translate("Failed to create a session.") );
 
     return $cmntr;
 }
@@ -219,7 +223,18 @@ sub __get_userpic {
 sub __check_api_configuration {
     my ( $app, $plugin, $facebook_api_key, $facebook_api_secret ) = @_;
 
-    return $plugin->error("Could not verify this app with Facebook")
+    if (    ( not eval { require Crypt::SSLeay; 1; } )
+        and ( not eval { require IO::Socket::SSL; 1; } ) )
+    {
+        return $plugin->error(
+            $plugin->translate(
+                "Facebook Commenters needs either Crypt::SSLeay or IO::Socket::SSL installed to communicate with Facebook."
+            )
+        );
+    }
+
+    return $plugin->error(
+        $plugin->translate("Please enter your Facebook App key and secret.") )
         unless ( $facebook_api_key and $facebook_api_secret );
 
     my $url = "https://graph.facebook.com/oauth/access_token?";
@@ -229,14 +244,28 @@ sub __check_api_configuration {
         "grant_type=client_credentials",
     );
 
-    my $ua = $app->new_ua( { paranoid => 1 } );
+    my $ua       = $app->new_ua( { paranoid => 1 } );
     my $response = $ua->get($url);
-    return $plugin->error("Could not verify this app with Facebook")
-        unless $response->is_success;
+    my $content  = $response->decoded_content();
 
-    my $content = $response->decoded_content();
-    return $plugin->error("Could not verify this app with Facebook")
-        unless $content =~ m/^access_token=(.*)/m;
+    if ( $response->is_error or $content !~ m/^access_token=/m ) {
+        if ( $content =~ m/^\{/ ) {
+
+            # Facebook is returning JSON error response
+            require JSON;
+            my $j_msg = eval { JSON::from_json($content) };
+            if ( $j_msg and $j_msg->{error} ) {
+                my $error = $j_msg->{error};
+                $content = $error->{message};
+                $content .= " [" . $error->{type} . "]" if $error->{type};
+            }
+        }
+        return $plugin->error(
+            $plugin->translate(
+                "Could not verify this app with Facebook: [_1]", $content
+            )
+        );
+    }
 
     return 1;
 }

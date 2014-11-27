@@ -9,21 +9,24 @@ use base 'FacebookCommenters::L10N::en_us';
 use vars qw( %Lexicon );
 %Lexicon = (
 
-## plugins/FacebookCommenters/lib/FacebookCommenters/Auth.pm
-
-## plugins/FacebookCommenters/plugin.pl
+## plugins/FacebookCommenters/config.yaml
 	'Provides commenter registration through Facebook Connect.' => 'Voegt registratie van reageerders toe via Facebook Connect.',
-	'Set up Facebook Commenters plugin' => 'Facebook Reageerders plugin instellen',
-	'{*actor*} commented on the blog post <a href="{*post_url*}">{*post_title*}</a>.' => '{*actor*} reageerde op blogbericht <a href="{*post_url*}">{*post_title*}</a>.',
-	'Could not register story template with Facebook: [_1]. Did you enter the correct application secret?' => 'Kon verhaalsjabloon niet registreren bij Facebook: [_1].  Vulde u het correcte applicatiegeheim in?',
-	'Could not register story template with Facebook: [_1]' => 'Kon verhaalsjabloon niet registreren bij Facebook: [_1].',
 	'Facebook' => 'Facebook',
+
+## plugins/FacebookCommenters/lib/FacebookCommenters/Auth.pm
+	'Set up Facebook Commenters plugin' => 'Facebook Reageerders plugin instellen',
+	'Authentication failure: [_1], reason:[_2]' => 'Authenticatie mislukt: [_1], reden: [_2]',
+	'Failed to created commenter.' => 'Aanmaken reageerder mislukt.',
+	'Failed to create a session.' => 'Aanmaken sessie mislukt.',
+	'Facebook Commenters needs either Crypt::SSLeay or IO::Socket::SSL installed to communicate with Facebook.' => 'Facebook Commenters vereist dat ofwel Crypt::SSLeay of IO::Socket::SSL geïnstalleerd zijn om met Facebook te kunnen communiceren.', # Translate - New
+	'Please enter your Facebook App key and secret.' => 'Gelieve uw Facebook App key en secret in te vullen.', # Translate - New
+	'Could not verify this app with Facebook: [_1]' => 'Kon deze app niet verifiëren bij Facebook: [_1]', # Translate - New
 
 ## plugins/FacebookCommenters/tmpl/blog_config_template.tmpl
 	'Facebook Application Key' => 'Facebook applicatiesleutel',
 	'The key for the Facebook application associated with your blog.' => 'De sleutel voor de Facebook-applicatie geassocieerd met uw blog.',
 	'Edit Facebook App' => 'Facebook app bewerken',
-	'Create Facebook App' => 'Facebook app aanmaken', # Translate - New
+	'Create Facebook App' => 'Facebook app aanmaken',
 	'Facebook Application Secret' => 'Facebook applicatiegeheim',
 	'The secret for the Facebook application associated with your blog.' => 'Het geheim voor de Facebook-applicatie geassocieerd met uw blog.',
 
