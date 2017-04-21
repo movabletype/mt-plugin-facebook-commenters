@@ -4,7 +4,7 @@
             <div class="asset-meta">
 <mt:if tag="CommenterAuthType" eq="Facebook">
               <div class="user-pic comment-fb-<$MTCommenterUsername>">
-                  <a href="http://www.facebook.com/profile.php?id=<$MTCommenterUsername>" class="auth-icon"><img src="<$MTCommenterAuthIconURL size="logo_small"$>" alt="<$mt:CommenterAuthType$>"/></a>
+                  <a href="http://www.facebook.com/<$MTCommenterUsername>" class="auth-icon"><img src="<$MTCommenterAuthIconURL size="logo_small"$>" alt="<$mt:CommenterAuthType$>"/></a>
                   <fb:profile-pic uid="<$MTCommenterUsername>" size="square" linked="true"><img src="http://static.ak.connect.facebook.com/pics/q_default.gif" /></fb:profile-pic>
               </div>
 <mt:else>
@@ -15,7 +15,7 @@
 <mt:setvarblock name="comment_author_link">
                         <span class="vcard author">
 <mt:if tag="CommenterAuthType" eq="Facebook">
-                      <fb:name uid="<$MTCommenterUsername>" linked="true" useyou="false"><a href="http://www.facebook.com/profile.php?id=<$MTCommenterUsername>"><$MTCommenterName></a></fb:name>
+                      <fb:name uid="<$MTCommenterUsername>" linked="true" useyou="false"><a href="http://www.facebook.com/<$MTCommenterUsername>"><$MTCommenterName></a></fb:name>
 <mt:else>
     <mt:IfCommenterIsAuthor>
                                 <a href="<$mt:Var name="profile_view_url" encode_html="1"$><$mt:CommenterID$>"><$mt:CommenterName encode_html="1"$></a>

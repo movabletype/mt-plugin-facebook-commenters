@@ -53,7 +53,7 @@ To display a Facebook user's profile photo next to their comment, you will have 
                 <div class="user-pic<mt:If tag="CommenterAuthType" eq="Facebook"> comment-fb-<$mt:CommenterUsername$></mt:If>">
 
                 <mt:If tag="CommenterAuthType" eq="Facebook">
-                    <a href="http://www.facebook.com/profile.php?id=<$mt:CommenterUsername$>" class="auth-icon"><img src="<$mt:CommenterAuthIconURL size="logo_small"$>" alt="<$mt:CommenterAuthType$>"/></a>
+                    <a href="http://www.facebook.com/<$mt:CommenterUsername$>" class="auth-icon"><img src="<$mt:CommenterAuthIconURL size="logo_small"$>" alt="<$mt:CommenterAuthType$>"/></a>
                     <fb:profile-pic uid="<$mt:CommenterUsername$>" size="square" linked="true"><img src="http://static.ak.connect.facebook.com/pics/q_default.gif" /></fb:profile-pic>
 
                 <mt:Else>
@@ -67,7 +67,7 @@ To display a Facebook user's profile photo next to their comment, you will have 
                 <div class="asset-meta">
                     <span class="byline">
                     <mt:If tag="CommenterAuthType" eq="Facebook">
-                        By <span class="vcard author"><fb:name uid="<$mt:CommenterUsername$>" linked="true" useyou="false"><a href="http://www.facebook.com/profile.php?id=<$mt:CommenterUsername$>"><$mt:CommenterName$></a></fb:name></span> on <a href="#comment-<$mt:CommentID$>"><abbr class="published" title="<$mt:CommentDate format_name="iso8601"$>"><$mt:CommentDate$></abbr></a></span>
+                        By <span class="vcard author"><fb:name uid="<$mt:CommenterUsername$>" linked="true" useyou="false"><a href="http://www.facebook.com/<$mt:CommenterUsername$>"><$mt:CommenterName$></a></fb:name></span> on <a href="#comment-<$mt:CommentID$>"><abbr class="published" title="<$mt:CommentDate format_name="iso8601"$>"><$mt:CommentDate$></abbr></a></span>
 
                     <mt:Else>
                         By <span class="vcard author"><mt:If tag="CommenterURL"><a href="<$mt:CommenterURL$>"><$mt:CommentAuthor default_name="Anonymous" $></a><mt:Else><$mt:CommentAuthorLink default_name="Anonymous" show_email="0"$></mt:If></span><mt:IfNonEmpty tag="CommentAuthorIdentity"><$mt:CommentAuthorIdentity$></mt:IfNonEmpty> on <a href="#comment-<$mt:CommentID$>"><abbr class="published" title="<$mt:CommentDate format_name="iso8601"$>"><$mt:CommentDate$></abbr></a></span>

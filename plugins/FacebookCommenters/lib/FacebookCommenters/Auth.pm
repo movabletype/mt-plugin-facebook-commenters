@@ -1,6 +1,3 @@
-# Copyright (C) 2008 Six Apart, Ltd. All Rights Reserved.
-#
-# Licensed under the same terms as Perl itself.
 package FacebookCommenters::Auth;
 use strict;
 use warnings;
@@ -131,10 +128,13 @@ sub handle_sign_in {
         unless $response->is_success;
 
     my $content = $response->decoded_content();
-    return $app->errtrans("Invalid request.")
-        unless $content =~ m/^access_token=(.*)/m;
+    require JSON;
+    my $j_msg = eval { JSON::from_json($content) };
 
-    my $access_token = $1;
+    return $app->errtrans("Invalid request.")
+        unless $j_msg && ref $j_msg eq 'HASH' && $j_msg->{access_token};
+
+    my $access_token = $j_msg->{access_token};
     $access_token =~ s/\s//g;
     $access_token =~ s/&.*//;
 
@@ -143,7 +143,6 @@ sub handle_sign_in {
     return $app->errtrans("Invalid request.")
         unless $response->is_success;
 
-    require JSON;
     my $user_data = JSON::from_json( $response->decoded_content() );
 
     my $nickname = $user_data->{name};
@@ -163,7 +162,7 @@ sub handle_sign_in {
             nickname    => $nickname,
             auth_type   => $auth_type,
             external_id => $fb_id,
-            url         => "http://www.facebook.com/profile.php?id=$fb_id",
+            url         => "http://www.facebook.com/$fb_id",
         );
     }
 
@@ -248,17 +247,19 @@ sub __check_api_configuration {
     my $response = $ua->get($url);
     my $content  = $response->decoded_content();
 
-    if ( $response->is_error or $content !~ m/^access_token=/m ) {
-        if ( $content =~ m/^\{/ ) {
+    # Facebook is returning JSON response
+    require JSON;
+    my $j_msg = eval { JSON::from_json($content) };
 
-            # Facebook is returning JSON error response
-            require JSON;
-            my $j_msg = eval { JSON::from_json($content) };
-            if ( $j_msg and $j_msg->{error} ) {
-                my $error = $j_msg->{error};
-                $content = $error->{message};
-                $content .= " [" . $error->{type} . "]" if $error->{type};
-            }
+    if (   $response->is_error
+        or !$j_msg
+        or ref $j_msg ne 'HASH'
+        or !$j_msg->{access_token} )
+    {
+        if ( $j_msg and ref $j_msg eq 'HASH' && $j_msg->{error} ) {
+            my $error = $j_msg->{error};
+            $content = $error->{message};
+            $content .= " [" . $error->{type} . "]" if $error->{type};
         }
         return $plugin->error(
             $plugin->translate(

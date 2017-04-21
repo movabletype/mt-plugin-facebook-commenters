@@ -1,6 +1,8 @@
-# Copyright (C) 2008 Six Apart, Ltd. All Rights Reserved.
+# Movable Type (r) (C) 2001-2017 Six Apart, Ltd. All Rights Reserved.
+# This code cannot be redistributed without permission from www.sixapart.com.
+# For more information, consult your Movable Type license.
 #
-# Licensed under the same terms as Perl itself.
+# $Id$
 
 package FacebookCommenters::L10N::de;
 
@@ -23,7 +25,7 @@ use vars qw( %Lexicon );
 	'Could not verify this app with Facebook: [_1]' => 'Die App konnte nicht mit Facebook verknüpft werden:  [_1]', # Translate - New # OK
 
 ## plugins/FacebookCommenters/tmpl/blog_config_template.tmpl
-	'Facebook Application Key' => 'Facebook Application Key',
+	'Facebook App ID' => 'Facebook Application Key',
 	'The key for the Facebook application associated with your blog.' => 'Der Application Key der mit Ihrem Blog verknüpften Facebook-Anwendung',
 	'Edit Facebook App' => 'Facebook-Anwendung bearbeiten',
 	'Create Facebook App' => 'Facebook-Anwendung erstellen',
