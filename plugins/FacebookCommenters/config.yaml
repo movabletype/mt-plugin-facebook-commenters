@@ -4,7 +4,7 @@ key: FacebookCommenters
 description: <MT_TRANS phrase="Provides commenter registration through Facebook Connect.">
 author_name: 'Six Apart, Ltd.'
 author_link: http://www.movabletype.org/
-l10n_class: FacebookCommenters::L10
+l10n_class: FacebookCommenters::L10N
 version: 2.31
 
 commenter_authenticators:
@@ -35,7 +35,8 @@ settings:
     facebook_app_secret:
         scope: blog
 
-blog_config_template: blog_config_template.tmpl
+blog_config_template:
+    code: $FacebookCommenters::FacebookCommenters::App::blog_config_tmpl
 
 callbacks:
     MT::PluginData::pre_save: $FacebookCommenters::FacebookCommenters::Auth::plugin_data_pre_save
