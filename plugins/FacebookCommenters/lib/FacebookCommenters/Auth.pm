@@ -198,7 +198,8 @@ sub __get_userpic {
         = "https://graph.facebook.com/"
         . $cmntr->external_id
         . "/picture?type=large";
-
+    local *MT::Auth::OpenID::_get_ua
+        = sub { MT->new_ua( { paranoid => 1, timeout => 10 } ) };
     if ( my $userpic = MT::Auth::OpenID::_asset_from_url($picture_url) ) {
         $userpic->tags('@userpic');
         $userpic->created_by( $cmntr->id );
