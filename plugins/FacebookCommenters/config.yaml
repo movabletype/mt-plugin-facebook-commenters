@@ -35,7 +35,8 @@ settings:
     facebook_app_secret:
         scope: blog
 
-blog_config_template: blog_config_template.tmpl
+blog_config_template:
+    code: $FacebookCommenters::FacebookCommenters::App::blog_config_tmpl
 
 callbacks:
     MT::PluginData::pre_save: $FacebookCommenters::FacebookCommenters::Auth::plugin_data_pre_save

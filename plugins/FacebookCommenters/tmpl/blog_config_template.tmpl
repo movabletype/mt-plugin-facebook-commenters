@@ -1,4 +1,11 @@
 <mtapp:setting
+    id="facbook_app_redirect_url"
+    label="<__trans phrase="OAuth Redirect URL of Facebook Login">"
+    hint='<__trans phrase='Please set this URL to "Valid OAuth redirect URIs" field of Facebook Login.'>'
+    show_hint="1">
+    <span id="fp_app_redirect_url"><mt:var name="fb_app_redirect_url"></span>
+</mtapp:setting>
+<mtapp:setting
     id="facebook_app_key"
     label="<__trans phrase="Facebook App ID">"
     hint="<__trans phrase="The key for the Facebook application associated with your blog.">"
@@ -13,3 +20,15 @@
     show_hint="1">
     <input type="text" name="facebook_app_secret" id="facebook_app_secret" value="<mt:var name="facebook_app_secret" escape="html">" size="40" />
 </mtapp:setting>
+
+<script type="text/javascript">
+jQuery(function($) {
+    var redirectUrl = $('#fb_app_redirect_url').text();
+    if (! redirectUrl.match(/^https?:\/\//)) {
+        redirectUrl =
+            redirectUrl.replace(/^\/?/, location.protocol + '//' + location.host + '/');
+        $('#fb_app_redirect_url').text(redirectUrl);
+    }
+});
+</script>
+
