@@ -162,7 +162,7 @@ sub handle_sign_in {
             nickname    => $nickname,
             auth_type   => $auth_type,
             external_id => $fb_id,
-            url         => "http://www.facebook.com/$fb_id",
+            url         => "https://www.facebook.com/$fb_id",
         );
     }
 
@@ -195,7 +195,7 @@ sub __get_userpic {
 
     require MT::Auth::OpenID;
     my $picture_url
-        = "http://graph.facebook.com/"
+        = "https://graph.facebook.com/"
         . $cmntr->external_id
         . "/picture?type=large";
 
