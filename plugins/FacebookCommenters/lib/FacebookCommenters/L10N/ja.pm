@@ -26,6 +26,8 @@ use vars qw( %Lexicon );
 	'Could not verify this app with Facebook: [_1]' => 'Facebookでこのアプリケーションを確認できません: [_1]',
 
 ## plugins/FacebookCommenters/tmpl/blog_config_template.tmpl
+	'OAuth Redirect URL of Facebook Login' => 'OAuth リダイレクトURL',
+	'Please set this URL to "Valid OAuth redirect URIs" field of Facebook Login.' => 'このURLを "Valid OAuth redirect URIs" に設定してください。',
 	'Facebook App ID' => 'Facebookアプリケーションキー',
 	'The key for the Facebook application associated with your blog.' => 'ブログ関連付用Facebookアプリケーションキー',
 	'Edit Facebook App' => 'Facebookアプリ編集',
