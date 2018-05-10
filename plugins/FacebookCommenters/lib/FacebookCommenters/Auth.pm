@@ -52,12 +52,8 @@ sub __create_return_url {
 
     my $blog_id = $q->param("blog_id");
     $blog_id =~ s/\D//g;
-    my $static = $q->param("static");
 
-    my @params = (
-        "__mode=handle_sign_in", "key=Facebook", "blog_id=$blog_id",
-        "static=" . _encode_url( $q->param("static") ),
-    );
+    my @params = ( "__mode=handle_sign_in", "key=Facebook" );
 
     if ( my $entry_id = $q->param("entry_id") ) {
         $entry_id =~ s/\D//g;
@@ -85,8 +81,37 @@ sub login {
         . join( '&',
         "client_id=" . $facebook_api_key,
         "redirect_uri=" . __create_return_url($app),
+        'state=' . _generate_state_session($app),
         );
     return $app->redirect($url);
+}
+
+sub _generate_state_session {
+    my $app = shift;
+
+    return $app->error(
+        $app->translate(
+            'The login could not be confirmed because of no/invalid blog_id')
+    ) unless $app->blog;
+
+    my $static = $app->param('static') || '';
+
+    my $state_session = $app->model('session')->new;
+    $state_session->kind('OT');    # One time Token
+    $state_session->id( $app->make_magic_token );
+    $state_session->start(time);
+    $state_session->duration( time + 5 * 60 );
+    $state_session->set( 'blog_id', $app->blog->id );
+    $state_session->set( 'static',  $static );
+    $state_session->save
+        or return $app->error(
+        $app->translate(
+            "The login could not be confirmed because of a database error ([_1])",
+            $state_session->errstr
+        )
+        );
+
+    $state_session->id;
 }
 
 sub handle_sign_in {
@@ -105,10 +130,30 @@ sub handle_sign_in {
         );
     }
 
+    require MT::Session;
+    my $state_session_id = $q->param('state');
+    my $state_session;
+    my $blog_id;
+    my $static;
+    if ($state_session = MT::Session::get_unexpired_value(
+            5 * 60, { id => $state_session_id, kind => 'OT' }
+        )
+        )
+    {
+        $blog_id = $state_session->get('blog_id');
+        $static  = $state_session->get('static');
+        $state_session->remove();
+    }
+    else {
+        return $app->error(
+            'The state parameter is missing or not matched with session.');
+    }
+    $app->param( 'blog_id', $blog_id );
+    $app->param( 'static',  $static );
+
     my $success_code = $q->param("code");
     my $ua = $app->new_ua( { paranoid => 1 } );
 
-    my $blog_id = $app->blog->id;
     my $facebook_api_key
         = $plugin->get_config_value( 'facebook_app_key', "blog:$blog_id" );
     my $facebook_api_secret
